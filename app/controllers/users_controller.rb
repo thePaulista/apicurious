@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
   def show
-    @user = OctocatService.find(current_user)
+    @user = Github.new(current_user)
   end
 end
