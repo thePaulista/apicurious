@@ -1,4 +1,4 @@
-<h2><%= current_user.name %>'s Github Page</h2>
+<h2><%= current_user.nickname %>'s Github </h2>
 
 <%= image_tag current_user.avatar_url %>
 
@@ -23,3 +23,9 @@
 <% @github_user.events_hash.map do | event| %>
  <%= event[:type] %> 
 <% end %>
+
+<h4>Received Events</h4>
+<% @github_user.received_events_hash.map do | event| %>
+ <%= event[:body] %> 
+<% end %>
+
