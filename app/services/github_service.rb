@@ -30,6 +30,22 @@ class GithubService
     parse(get_starred)
   end
 
+  def get_organizations
+    @conn.get("#{@user.nickname}/orgs")
+  end
+
+  def organizations_hash
+    parse(get_organizations)
+  end
+
+  def get_repos
+    @conn.get("#{@user.nickname}/repos")
+  end
+
+  def repos_hash
+    parse(get_repos).map { |repo| repo[:name] }.join(", " )
+  end
+
   def parse(response)
     JSON.parse(response.body, symbolize_names: true)
   end

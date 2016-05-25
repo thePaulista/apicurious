@@ -3,8 +3,11 @@
 <%= image_tag current_user.avatar_url %>
 
 <ul>
-    <li>Followers: <%= @github_user.followers_hash.count %></li>
-    <li>Following:<%= @github_user.following_hash.count %></li>
-    <li>Starred: <%= @github_user.starred_hash.count %></li>
+  <li>Followers: <%= @github_user.followers_hash.count %></li>
+  <li>Following:<%= @github_user.following_hash.count %></li>
+  <li>Starred: <%= @github_user.starred_hash.count %></li>
+  <li>Organizations: <%= @github_user.organizations_hash %></li>
 </ul>
+
+<%= @github_user.repos_hash %>
 
