@@ -1,11 +1,10 @@
-<h2><%= current_user.name %></h2>
+<h2><%= current_user.name %>'s Github Page</h2>
 
-<%#= image_tag current_user.avatar_url %>
+<%= image_tag current_user.avatar_url %>
 
 <ul>
-  <% @user.each do |user| %>
-  <li>user.followers.count</li>
-  <li>user.following.count</li>
-  <% end %>
+    <li>Followers: <%= @github_user.followers_hash.count %></li>
+    <li>Following:<%= @github_user.following_hash.count %></li>
+    <li>Starred: <%= @github_user.starred_hash.count %></li>
 </ul>
 
