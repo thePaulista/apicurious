@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get "/auth/github/callback", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  get "/octocat", to: "users#show"
+  get "/user", to: "users#show", as: :user
 end
