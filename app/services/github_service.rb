@@ -43,7 +43,16 @@ class GithubService
   end
 
   def repos_hash
-    parse(get_repos).map { |repo| repo[:name] }.join(", " )
+    parse(get_repos)#.map { |repo| repo[:name] }.sort_by {|created| repo[:created_at] }
+  end
+
+  def get_recent_events
+    @conn.get("#{@user.nickname}/repos")
+    @conn.get("#{@user.nickname}/events")
+  end
+
+  def events_hash
+    parse(get_recent_events)
   end
 
   def parse(response)

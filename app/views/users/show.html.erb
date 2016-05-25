@@ -5,9 +5,21 @@
 <ul>
   <li>Followers: <%= @github_user.followers_hash.count %></li>
   <li>Following:<%= @github_user.following_hash.count %></li>
-  <li>Starred: <%= @github_user.starred_hash.count %></li>
+<li>Starred: <%= @github_user.starred_hash.count %></li>
+  <% if @github_user.organizations_hash == [] %>
+    <%= "#{current_user.name} does not belong to any organization" %> 
+    <% else %>
   <li>Organizations: <%= @github_user.organizations_hash %></li>
+  <% end %>
 </ul>
 
-<%= @github_user.repos_hash %>
 
+<h4>Repositories</h4>
+<% @github_user.repos_hash.map do | repo| %>
+  <%= link_to repo[:name], repo[:html_url] %> <br>
+<% end %>
+
+<h4>Recent Events</h4>
+<% @github_user.events_hash.map do | event| %>
+ <%= event[:type] %> 
+<% end %>
