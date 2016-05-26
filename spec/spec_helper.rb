@@ -45,6 +45,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
   # test failures related to randomization by passing the same `--seed` value
@@ -52,3 +53,9 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 end
 
+RSpec.configure do |config|
+  config.mock_with :mocha
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+end

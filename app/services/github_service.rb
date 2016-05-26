@@ -13,6 +13,14 @@ class GithubService
     parse(get_followers)
   end
 
+  def get_followers_events
+    followers_hash.map do |name|
+      name[:login]
+    end.map do |login_name|
+      parse(conn.get("#{login_name}/events"))
+    end.flatten
+  end
+
   def get_following
     conn.get("#{user.nickname}/following")
   end
@@ -65,7 +73,7 @@ class GithubService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  private
+private
 
   def user
     @user

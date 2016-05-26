@@ -6,7 +6,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
-require 'rack_session_access/capybara'
 require 'webmock'
 require 'vcr'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -63,7 +62,6 @@ RSpec.configure do |config|
       }
     })
   end
-end
 #
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -84,7 +82,7 @@ end
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-#end
+end
 
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests

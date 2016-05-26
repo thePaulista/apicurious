@@ -6,4 +6,5 @@ Rails.application.routes.draw do
 
   get "/user", to: "users#show", as: :user
   get "/followers", to: "githubs#followers", as: :followers
+  get "/following", to: "githubs#following", as: :following
 end

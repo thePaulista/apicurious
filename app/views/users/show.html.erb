@@ -1,11 +1,12 @@
 <h2><%= current_user.nickname %>'s Github </h2>
 
-<%= image_tag current_user.avatar_url, size:"100x100" %>
+<%= image_tag current_user.avatar_url, size:"200x200" %>
 
 <ul>
   <li>Followers: <%= link_to @github_user.lookup_followers.count, followers_path %></li>
   <li>Following:<%= @github_user.lookup_following.count %></li>
 <li>Starred: <%= @github_user.lookup_starred.count %></li>
+
   <% if @github_user.lookup_organizations == [] %>
     <%= "#{current_user.nickname} does not belong to any organization" %> 
     <% else %>
@@ -18,7 +19,10 @@
   <%= link_to repo[:name], repo[:html_url] %> <br>
 <% end %>
 
-<h4>Recent Commits Summary</h4>
-<% @github_user.lookup_events.each do | mssg|%>
-  <%= mssg %><br>
+<h4>Recent Contribution Summary</h4>
+<p><%= @github_user.lookup_events.count %> commits</p>
+<ol>
+<% @github_user.lookup_events.each  do | mssg|%>
+  <li><%= mssg %></li>
 <% end %>
+</ol>
