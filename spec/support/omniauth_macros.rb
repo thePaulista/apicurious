@@ -1,4 +1,4 @@
-module OmniauthMacrs
+module OmniauthMacros
   def mock_auth_hash
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
       'provider' => "github",

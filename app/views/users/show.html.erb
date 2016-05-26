@@ -3,7 +3,7 @@
 <%= image_tag current_user.avatar_url, size:"100x100" %>
 
 <ul>
-  <li>Followers: <%= @github_user.lookup_followers.count %></li>
+  <li>Followers: <%= link_to @github_user.lookup_followers.count, followers_path %></li>
   <li>Following:<%= @github_user.lookup_following.count %></li>
 <li>Starred: <%= @github_user.lookup_starred.count %></li>
   <% if @github_user.lookup_organizations == [] %>
@@ -18,7 +18,7 @@
   <%= link_to repo[:name], repo[:html_url] %> <br>
 <% end %>
 
-<h4>Recent Events</h4>
-<%= @github_user.lookup_events %>
-
-
+<h4>Recent Commits Summary</h4>
+<% @github_user.lookup_events.each do | mssg|%>
+  <%= mssg %><br>
+<% end %>

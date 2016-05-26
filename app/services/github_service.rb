@@ -1,11 +1,12 @@
 class GithubService
   def initialize(user)
-    @conn =  Faraday.new(url: "https://api.github.com/users/#{user.nickname}")
+    @user = user
+    @conn =  Faraday.new(url: "https://api.github.com/users")
     @conn.headers["Authorization"] = "token #{user.oauth_token}"
   end
 
   def get_followers
-    conn.get("followers")
+    conn.get("#{user.nickname}/followers")
   end
 
   def followers_hash
@@ -13,7 +14,7 @@ class GithubService
   end
 
   def get_following
-    conn.get("following")
+    conn.get("#{user.nickname}/following")
   end
 
   def following_hash
@@ -21,7 +22,7 @@ class GithubService
   end
 
   def get_starred
-    conn.get("starred")
+    conn.get("#{user.nickname}/starred")
   end
 
   def starred_hash
@@ -29,7 +30,7 @@ class GithubService
   end
 
   def get_organizations
-    conn.get("orgs")
+    conn.get("#{user.nickname}/orgs")
   end
 
   def organizations_hash
@@ -37,7 +38,7 @@ class GithubService
   end
 
   def get_repos
-    conn.get("repos")
+    conn.get("#{user.nickname}/repos")
   end
 
   def repos_hash
@@ -45,7 +46,7 @@ class GithubService
   end
 
   def get_events
-    conn.get("events")
+    conn.get("#{user.nickname}/events")
   end
 
   def events_hash
@@ -53,7 +54,7 @@ class GithubService
   end
 
   def get_received_events
-    conn.get("received_events")
+    conn.get("#{user.nickname}/received_events")
   end
 
   def received_events_hash
@@ -66,7 +67,11 @@ class GithubService
 
   private
 
+  def user
+    @user
+  end
+
   def conn
-    @conn
+   @conn
   end
 end

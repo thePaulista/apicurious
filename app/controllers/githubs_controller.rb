@@ -1,5 +1,5 @@
 class GithubsController < ApplicationController
-  def show
-    @commit = Commit.all(current_user)
+  def followers
+    @followers = GithubUser.new(current_user)
   end
 end

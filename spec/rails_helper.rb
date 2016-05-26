@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
+require 'rack_session_access/capybara'
 require 'webmock'
 require 'vcr'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -44,6 +45,26 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+ def stub_omniauth
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new( {
+      provider: "github",
+      uid: "1234",
+      extra: {
+        raw_info: {
+          name: "Horace",
+          nickname: "worace",
+          avatar_rul: "worace.png",
+        }
+      },
+      credentials: {
+        token: "pizza",
+        secret: "secretpizza"
+      }
+    })
+  end
+end
+#
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -63,7 +84,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-end
+#end
 
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests

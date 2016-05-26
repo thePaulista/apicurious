@@ -12,9 +12,13 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 #
-# The `.rspec` file also contains a few flags that are not defaults but that
+# The `.rspec` file also contai:bd
+# ns a few flags that are not defaults but that
 # users commonly want.
-#
+#require 'simplecov'
+require 'simplecov'
+SimpleCov.start("rails")
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 #  config.include(OmniauthMacros)

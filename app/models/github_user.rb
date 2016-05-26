@@ -8,10 +8,18 @@ class GithubUser
 
   def lookup_followers
     service.followers_hash
-  end
+    end
 
   def lookup_following
     service.following_hash
+  end
+
+  def followers_event
+    lookup_followers.select do |event|
+      if event[:type] == "PushEvent"
+        event[:payload][:commits][0][:message]
+      end
+    end
   end
 
   def lookup_starred
@@ -27,19 +35,16 @@ class GithubUser
   end
 
   def lookup_events
+    mssg_array = []
     service.events_hash.select do |event|
       if event[:type] == "PushEvent"
-        mssg_array = []
         message_count =  event[:payload][:commits].count
-        message_count.times do |n|
+        message_count.times.map do |n|
           mssg_array <<  event[:payload][:commits][n][:message]
         end
       end
-    mssg_array
     end
+    mssg_array
   end
-
-  def lookup_received_events
-  end
-
 end
+
