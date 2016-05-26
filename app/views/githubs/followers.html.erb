@@ -1,10 +1,7 @@
 <h2> <%= current_user.nickname %>'s Followers </h2>
 <ol>
 <% @followers.lookup_followers.each do |follower| %>
-  <li><%= link_to follower[:login], follower[:html_url] %></li>
+  <li><%= link_to follower[:login], follower[:html_url] %> </li>
 <% end %>
 </ol>
 
-<%# @followers.lookup_followers_events.each do |event| %>
-  <%#= event %>
-<%# end %>

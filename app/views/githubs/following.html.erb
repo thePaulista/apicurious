@@ -1,0 +1,7 @@
+<h2> <%= current_user.nickname %> is following </h2>
+<ol>
+<% @following.lookup_following.each do |following| %>
+  <li><%= link_to following[:login], following[:html_url] %></li>
+<% end %>
+</ol>
+

@@ -4,7 +4,7 @@
 
 <ul>
   <li>Followers: <%= link_to @github_user.lookup_followers.count, followers_path %></li>
-  <li>Following:<%= @github_user.lookup_following.count %></li>
+  <li>Following:<%= link_to @github_user.lookup_following.count, following_path %></li>
 <li>Starred: <%= @github_user.lookup_starred.count %></li>
 
   <% if @github_user.lookup_organizations == [] %>
