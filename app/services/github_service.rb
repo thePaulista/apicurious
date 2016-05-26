@@ -1,9 +1,8 @@
 class GithubService
-
   def initialize(user)
     @conn =  Faraday.new(url: "https://api.github.com/users/#{user.nickname}")
     @conn.headers["Authorization"] = "token #{user.oauth_token}"
- end
+  end
 
   def get_followers
     conn.get("followers")
@@ -42,15 +41,15 @@ class GithubService
   end
 
   def repos_hash
-    parse(get_repos)#.map { |repo| repo[:name] }.sort_by {|created| repo[:created_at] }
+    parse(get_repos)
   end
 
-  def get_recent_events
+  def get_events
     conn.get("events")
   end
 
   def events_hash
-    parse(get_recent_events)
+    parse(get_events).select {|event| event[:type] == "PushEvent"}
   end
 
   def get_received_events

@@ -1,30 +1,37 @@
-class GithubUser < OpenStruct
-  def self.service
-    GithubService.new
+class GithubUser
+  attr_reader :user, :service
+
+  def initialize(user)
+    @user = user
+    @service  = GithubService.new(user)
   end
 
-  def self.find(id)
-    temp_user_hash = service.user_hash(id)
-    GithubUser.new(temp_user_hash)
-  end
-
-  def self.all
-    temp_users_hash = service.users_hash
-    temp_users_hash.map do |temp_user_hash|
-      GithubUser.new(temp_user_hash)
-    end
-  end
-
-  def self.lookup_followers
+  def lookup_followers
     service.followers_hash
   end
 
-  def self.lookup_following
+  def lookup_following
     service.following_hash
   end
 
-  def self.lookup_starrred
+  def lookup_starred
     service.starred_hash
+  end
+
+  def lookup_organizations
+    service.organizations_hash
+  end
+
+  def lookup_repos
+    service.repos_hash
+  end
+
+  def lookup_events
+    service.events_hash
+  end
+
+  def lookup_received_events
+    service.received_events_hash
   end
 
 end
