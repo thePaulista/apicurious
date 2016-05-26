@@ -38,12 +38,13 @@ class GithubUser < OpenStruct
     mssg_array
   end
 
- # def lookup_followers_events
- #   service.get_followers_events.select |event|
- #   if event.first[:type] == "PushEvent"
- #    x = event.first[:payload][:commits].first[:message]
- #    x.nil? ? super : x
- #   end
- # end
+  def lookup_followers_events
+    follower_events = []
+    num = service.get_followers_events.count
+    num.times do |n|
+      x = follower_events << service.get_followers_events[n][:payload][:commits].first[:message]
+    end
+    follower_events
+  end
 end
 
