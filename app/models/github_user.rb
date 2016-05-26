@@ -1,8 +1,7 @@
-class GithubUser
-  attr_reader :user, :service
+class GithubUser < OpenStruct
+  attr_reader :service
 
   def initialize(user)
-    @user = user
     @service  = GithubService.new(user)
   end
 
@@ -27,19 +26,24 @@ class GithubUser
   end
 
   def lookup_events
+    mssg_array = []
     service.events_hash.select do |event|
       if event[:type] == "PushEvent"
-        mssg_array = []
         message_count =  event[:payload][:commits].count
-        message_count.times do |n|
+        message_count.times.map do |n|
           mssg_array <<  event[:payload][:commits][n][:message]
         end
       end
-    mssg_array
     end
+    mssg_array
   end
 
-  def lookup_received_events
-  end
-
+ # def lookup_followers_events
+ #   service.get_followers_events.select |event|
+ #   if event.first[:type] == "PushEvent"
+ #    x = event.first[:payload][:commits].first[:message]
+ #    x.nil? ? super : x
+ #   end
+ # end
 end
+

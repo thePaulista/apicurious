@@ -8,12 +8,14 @@ require 'rails_helper'
 #  end
 #
 #  scenario "successfully" do
+#    user =  User.create!(name: "Horace")
+#
 #    visit root_path
 #
-#    click_link "Login with Github"
+#    ApplicationController.any_instance.stubs(:current_user).returns(user)
 #
 #    expect(page.status_code).to eq 200
-#    expect(current_path).to eq root_path
+#    click_link "Login with Github"
 #    expect(page).to have_content("Horace")
 #    expect(page).to have_content("Logout")
 #  end
@@ -22,17 +24,16 @@ require 'rails_helper'
 #    OmniAuth.config.test_mode = true
 #    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new( {
 #      provider: "github",
-#      uid: "1234",
+#      uid: "13561812",
 #      extra: {
 #        raw_info: {
-#          name: "Horace",
-#          nickname: "worace",
-#          avatar_url: "worace.png",
+#          name: "Hedy",
+#          nickname: "thePaulista",
+#          avatar_url: "thepaulista.png",
 #        }
 #      },
 #      credentials: {
-#        token: "pizza",
-#        secret: "secretpizza"
+#        token: ENV["OAUTH_TOKEN"]
 #      }
 #    })
 #  end
