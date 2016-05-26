@@ -49,7 +49,7 @@ class GithubService
   end
 
   def events_hash
-    parse(get_events).select {|event| event[:type] == "PushEvent"}
+    parse(get_events)
   end
 
   def get_received_events

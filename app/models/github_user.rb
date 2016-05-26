@@ -27,11 +27,19 @@ class GithubUser
   end
 
   def lookup_events
-    service.events_hash
+    service.events_hash.select do |event|
+      if event[:type] == "PushEvent"
+        mssg_array = []
+        message_count =  event[:payload][:commits].count
+        message_count.times do |n|
+          mssg_array <<  event[:payload][:commits][n][:message]
+        end
+      end
+    mssg_array
+    end
   end
 
   def lookup_received_events
-    service.received_events_hash
   end
 
 end

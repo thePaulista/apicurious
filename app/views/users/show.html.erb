@@ -19,12 +19,6 @@
 <% end %>
 
 <h4>Recent Events</h4>
-<% @github_user.lookup_events.map do |event| %>
-  <%= event %>
-<% end %>
+<%= @github_user.lookup_events %>
 
-<h4>Received Events</h4>
-<% @github_user.lookup_received_events.map do | event| %>
- <%= event[:body] %> 
-<% end %>
 
