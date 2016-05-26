@@ -1,13 +1,11 @@
 class GithubService
-
   def initialize(user)
-    @user = user
-    @conn =  Faraday.new(url: "https://api.github.com/users/")
+    @conn =  Faraday.new(url: "https://api.github.com/users/#{user.nickname}")
     @conn.headers["Authorization"] = "token #{user.oauth_token}"
- end
+  end
 
   def get_followers
-    @conn.get("#{@user.nickname}/followers")
+    conn.get("followers")
   end
 
   def followers_hash
@@ -15,7 +13,7 @@ class GithubService
   end
 
   def get_following
-    @conn.get("#{@user.nickname}/following")
+    conn.get("following")
   end
 
   def following_hash
@@ -23,7 +21,7 @@ class GithubService
   end
 
   def get_starred
-    @conn.get("#{@user.nickname}/starred")
+    conn.get("starred")
   end
 
   def starred_hash
@@ -31,7 +29,7 @@ class GithubService
   end
 
   def get_organizations
-    @conn.get("#{@user.nickname}/orgs")
+    conn.get("orgs")
   end
 
   def organizations_hash
@@ -39,23 +37,36 @@ class GithubService
   end
 
   def get_repos
-    @conn.get("#{@user.nickname}/repos")
+    conn.get("repos")
   end
 
   def repos_hash
-    parse(get_repos)#.map { |repo| repo[:name] }.sort_by {|created| repo[:created_at] }
+    parse(get_repos)
   end
 
-  def get_recent_events
-    @conn.get("#{@user.nickname}/repos")
-    @conn.get("#{@user.nickname}/events")
+  def get_events
+    conn.get("events")
   end
 
   def events_hash
-    parse(get_recent_events)
+    parse(get_events)
+  end
+
+  def get_received_events
+    conn.get("received_events")
+  end
+
+  def received_events_hash
+    parse(get_received_events)
   end
 
   def parse(response)
     JSON.parse(response.body, symbolize_names: true)
+  end
+
+  private
+
+  def conn
+    @conn
   end
 end

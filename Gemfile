@@ -36,10 +36,17 @@ gem 'omniauth-github'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'better_errors'
   gem 'launchy'
   gem 'pry'
   gem 'capybara'
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
